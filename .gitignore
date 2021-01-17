@@ -1,0 +1,5 @@
+gatsby/node_modules/
+.cache/
+public
+
+.idea
