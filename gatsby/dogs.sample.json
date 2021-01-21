@@ -1,0 +1,27 @@
+[
+  {
+    "id": "HpW0clxI9uKLlhhk3q9E",
+    "img_url": "https://images.dog.ceo/breeds/eskimo/n02109961_17033.jpg",
+    "breed": "Eskimo"
+  },
+  {
+    "id": "IVMfVwJO5WEaH7uLkHva",
+    "img_url": "https://images.dog.ceo/breeds/stbernard/n02109525_2008.jpg",
+    "breed": "Stbernard"
+  },
+  {
+    "id": "UDyNNgPsoIUD7Gd71ncl",
+    "breed": "Cairn",
+    "img_url": "https://images.dog.ceo/breeds/cairn/n02096177_1450.jpg"
+  },
+  {
+    "id": "nAobJebmTorBZSKEpUGl",
+    "breed": "Beagle",
+    "img_url": "https://images.dog.ceo/breeds/beagle/n02088364_16065.jpg"
+  },
+  {
+    "id": "rZqC2q6UuufrFtR85muU",
+    "breed": "Labrador",
+    "img_url": "https://images.dog.ceo/breeds/labrador/n02099712_4913.jpg"
+  }
+]

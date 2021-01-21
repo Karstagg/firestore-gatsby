@@ -3,6 +3,7 @@ require("dotenv").config({
 });
 
 const fetch = require("node-fetch");
+const fs = require("fs");
 
 exports.sourceNodes = async ({
   actions,
@@ -10,6 +11,16 @@ exports.sourceNodes = async ({
   createContentDigest,
 }) => {
   try {
+    const activeEnv =
+      process.env.GATSBY_ACTIVE_ENV || process.env.NODE_ENV || "development";
+
+    if (activeEnv !== "production") {
+      const feed = JSON.parse(fs.readFileSync("./dogs.sample.json"));
+      createNodes(actions, createNodeId, createContentDigest, feed);
+
+      return;
+    }
+
     const response = await fetch(`${process.env.API_URL}`, {
       method: "POST",
       headers: {
