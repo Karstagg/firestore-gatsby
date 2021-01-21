@@ -1,5 +1,5 @@
 require("dotenv").config({
-  path: `.env.${process.env.NODE_ENV}`,
+  path: `.env`,
 });
 
 const fetch = require("node-fetch");
@@ -10,7 +10,7 @@ exports.sourceNodes = async ({
   createContentDigest,
 }) => {
   try {
-    const rawResponse = await fetch(`${process.env.API_URL}`, {
+    const response = await fetch(`${process.env.API_URL}`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -19,15 +19,35 @@ exports.sourceNodes = async ({
       },
     });
 
-    if (!rawResponse || !rawResponse.ok) {
+    if (!response?.ok) {
       console.error("Cannot fetch dogs data.");
       return;
     }
 
-    const dogs = await rawResponse.json();
+    const dogs = await response.json();
 
-    console.log(dogs);
+    createNodes(actions, createNodeId, createContentDigest, dogs);
   } catch (err) {
     console.error(err);
   }
+};
+
+const DOG_NODE_TYPE = "Dog";
+
+const createNodes = (actions, createNodeId, createContentDigest, dogs) => {
+  const { createNode } = actions;
+
+  dogs.forEach((entry) =>
+    createNode({
+      ...entry,
+      id: createNodeId(`${DOG_NODE_TYPE}-${entry.id}`),
+      parent: null,
+      children: [],
+      internal: {
+        type: `${DOG_NODE_TYPE}`,
+        content: JSON.stringify(entry),
+        contentDigest: createContentDigest(entry),
+      },
+    })
+  );
 };

@@ -5,4 +5,4 @@ public
 .idea
 
 cloud/dogs.query.txt
-gatbsy/.env.*
+gatbsy/.env*
