@@ -6,6 +6,7 @@ const app = admin.initializeApp();
 app.firestore().settings({ timestampsInSnapshots: true });
 
 interface Dog {
+  id: string;
   breed: string;
   img_url: string;
 }
@@ -18,7 +19,10 @@ const findDogs = async (): Promise<Dog[]> => {
   }
 
   return snapshot.docs.map((doc) => {
-    return doc.data() as Dog;
+    return {
+      id: doc.id,
+      ...doc.data(),
+    } as Dog;
   });
 };
 
