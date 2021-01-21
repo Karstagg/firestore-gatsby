@@ -51,3 +51,25 @@ const createNodes = (actions, createNodeId, createContentDigest, dogs) => {
     })
   );
 };
+
+const { createRemoteFileNode } = require(`gatsby-source-filesystem`);
+
+exports.onCreateNode = async ({
+  node,
+  actions: { createNode },
+  createNodeId,
+  getCache,
+}) => {
+  if (node.internal.type === DOG_NODE_TYPE) {
+    const fileNode = await createRemoteFileNode({
+      url: node.img_url,
+      parentNodeId: node.id,
+      createNode,
+      createNodeId,
+      getCache,
+    });
+    if (fileNode) {
+      node.remoteImage___NODE = fileNode.id;
+    }
+  }
+};
